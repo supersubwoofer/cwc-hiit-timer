@@ -1,6 +1,8 @@
 import { LitElement, customElement, property, TemplateResult } from 'lit-element';
 import * as view from './presentation';
 import { secToHMS, countDown } from './timerHelper';
+import { currentRound, sprintCounter, restCounter, coolDownCounter } from './counterHelper';
+import { Model, ControlState, GetControlState } from './stateHelper';
 
 @customElement('hiit-timer')
 export class HiitTimer extends LitElement {
@@ -31,17 +33,17 @@ export class HiitTimer extends LitElement {
         secToHMS(countDown(this.warmUp, this.counter), 'mm:ss'), 
         secToHMS(this.counter), this.PauseHandler);
       case ControlState.Sprint: return view.sprint(
-        CurrentRound(this.counter, this.warmUp, this.sprint, this.rest),
-        secToHMS(countDown(this.sprint, SprintCounter(this.counter, this.warmUp, this.sprint, this.rest)), 'mm:ss'), 
+        currentRound(this.counter, this.warmUp, this.sprint, this.rest),
+        secToHMS(countDown(this.sprint, sprintCounter(this.counter, this.warmUp, this.sprint, this.rest)), 'mm:ss'), 
         secToHMS(this.counter), this.PauseHandler);
       case ControlState.Rest:
         return view.rest(
-        CurrentRound(this.counter, this.warmUp, this.sprint, this.rest),
-        secToHMS(countDown(this.rest, RestCounter(this.counter, this.warmUp, this.sprint, this.rest)), 'mm:ss'), 
+        currentRound(this.counter, this.warmUp, this.sprint, this.rest),
+        secToHMS(countDown(this.rest, restCounter(this.counter, this.warmUp, this.sprint, this.rest)), 'mm:ss'), 
         secToHMS(this.counter), this.PauseHandler);
       case ControlState.Cooldown:
         return view.coolDown(
-        secToHMS(countDown(this.coolDown, CoolDownCounter(this.set, this.counter, this.warmUp, this.sprint, this.rest)), 'mm:ss'), 
+        secToHMS(countDown(this.coolDown, coolDownCounter(this.set, this.counter, this.warmUp, this.sprint, this.rest)), 'mm:ss'), 
         secToHMS(this.counter));
       case ControlState.Done:
         return view.done(secToHMS(this.counter));
@@ -89,67 +91,4 @@ export class HiitTimer extends LitElement {
     clearInterval(timerID);
   }
 
-}
-
-// Model
-class Model{
-  set: number
-  warmUp: number
-  sprint: number
-  rest: number
-  coolDown: number
-  counter: number
-  isPause: boolean
-}
-
-// Control States
-enum ControlState{
-  Paused,
-  Standby,
-  Warmup,
-  Sprint,
-  Rest,
-  Cooldown,
-  Done,
-  ErrorState
-}
-
-let GetControlState = (model: Model): ControlState => {
-  let sprintStart = model.counter - model.warmUp;
-  let combineSprintRest = model.sprint + model.rest;
-  let sprintCounter = sprintStart % combineSprintRest;
-  let restCounter = sprintCounter - model.sprint;
-  let totalSessionTime = (model.warmUp + model.coolDown) + (model.set * (model.sprint + model.rest));
-
-  if(model.counter == 0)
-    return ControlState.Standby;
-  if(model.counter > 0 && model.counter < model.warmUp)
-    return ControlState.Warmup;
-  if((totalSessionTime - model.counter) <= 0)
-    return ControlState.Done;
-  if((sprintStart/combineSprintRest) >= model.set)
-    return ControlState.Cooldown;
-  if(sprintCounter < model.sprint)
-    return ControlState.Sprint;
-  if(restCounter < model.rest)
-    return ControlState.Rest;
-  
-  return ControlState.ErrorState;
-}
-
-// Counter Helper
-let SprintCounter = (counter, warmup, sprint, rest) : number => {
-  return (counter - warmup) % (sprint + rest);
-}
-let RestCounter = (counter, warmup, sprint, rest) : number => {
-  return SprintCounter(counter, warmup, sprint, rest) - sprint;
-}
-let CoolDownCounter = (sets, counter, warmup, sprint, rest) : number => {
-  return (counter - warmup) - (sets * (sprint + rest));
-}
-let CurrentRound = (counter, warmup, sprint, rest) : number => {
-  if(counter <= warmup)
-    return 1;
-  else
-    return Math.ceil((counter - warmup + 1)/(sprint + rest));
 }
