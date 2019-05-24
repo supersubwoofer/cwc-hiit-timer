@@ -1,0 +1,23 @@
+{
+  "name": "hiit-timer",
+  "version": "0.0.0",
+  "description": "HIIT Timer Web component",
+  "main": "hiit-timer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Web",
+    "Components",
+    "LitElement"
+  ],
+  "author": "wing",
+  "license": "MIT",
+  "dependencies": {
+    "lit-element": "^2.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.5"
+  },
+  "browserslist": ["> 5%"]
+}
