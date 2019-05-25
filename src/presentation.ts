@@ -1,8 +1,8 @@
 import { html } from 'lit-html';
 
 export const error = () => html`<p>Error</p>`;
-export const standby = (startActionHandler) => html`
-  <p>HIIT Session</p>
+export const standby = (title, startActionHandler) => html`
+  <p>${title}</p>
   <button @click="${startActionHandler}">Start</button>
   `;
 

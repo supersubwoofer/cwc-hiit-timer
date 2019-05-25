@@ -6,6 +6,7 @@ import { Model, ControlState, GetControlState } from './stateHelper';
 
 @customElement('hiit-timer')
 export class HiitTimer extends LitElement {
+  @property({type : String}) title = "Sprint-8";
   @property({type : Number}) set = 8;
   @property({type : Number}) warmUp = 300;
   @property({type : Number}) sprint = 20;
@@ -27,7 +28,7 @@ export class HiitTimer extends LitElement {
     });
 
     switch(controlState) {
-      case ControlState.Standby: return view.standby(this.StartHandler);
+      case ControlState.Standby: return view.standby(this.title, this.StartHandler);
       case ControlState.Warmup: 
         return view.warmUp(
         secToHMS(countDown(this.warmUp, this.counter), 'mm:ss'), 
