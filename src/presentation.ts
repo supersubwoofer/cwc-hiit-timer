@@ -7,11 +7,11 @@ export const standby = (title, startActionHandler) => html`
   `;
 
 export const warmUp = (countDown, timer, pauseHandler) => html`
-<p>Warm up</p>
-<p>${countDown}</p>
-<p>${timer}</p>
-<button @click="${pauseHandler}">Pause</button>
-`;
+  <p>Warm up</p>
+  <p>${countDown}</p>
+  <p>${timer}</p>
+  <button @click="${pauseHandler}">Pause</button>
+  `;
 
 export const sprint = (roundNumber, countDown, timer, pauseHandler) => html`
   <p>Round: ${roundNumber}</p>
@@ -22,20 +22,20 @@ export const sprint = (roundNumber, countDown, timer, pauseHandler) => html`
   `;
 
 export const rest = (roundNumber, countDown, timer, pauseHandler) => html`
-<p>Round: ${roundNumber}</p>
-<p>Rest</p>
-<p>${countDown}</p>
-<p>${timer}</p>
-<button @click="${pauseHandler}">Pause</button>
-`;
+  <p>Round: ${roundNumber}</p>
+  <p>Rest</p>
+  <p>${countDown}</p>
+  <p>${timer}</p>
+  <button @click="${pauseHandler}">Pause</button>
+  `;
 
 export const coolDown = (countDown, timer) => html`
-<p>Cool Down</p>
-<p>${countDown}</p>
-<p>${timer}</p>
-`;
+  <p>Cool Down</p>
+  <p>${countDown}</p>
+  <p>${timer}</p>
+  `;
 
 export const done = (timer) => html`
-<p>Done !</p>
-<p>You have finished a HIIT session of ${timer}.</p>
-`;
+  <p>Done !</p>
+  <p>You have finished a HIIT session of ${timer}.</p>
+  `;
