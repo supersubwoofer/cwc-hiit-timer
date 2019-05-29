@@ -2,7 +2,8 @@
   "name": "hiit-timer",
   "version": "0.0.0",
   "description": "HIIT Timer Web component",
-  "main": "hiit-timer.js",
+  "main": "src/hiit-timer.js",
+  "module": "src/hiit-timer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
