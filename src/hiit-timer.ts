@@ -65,31 +65,25 @@ export class HiitTimer extends LitElement {
     });
 
     switch(controlState) {
-      case ControlState.Done: this.ClearInterval(this.timerID);
+      case ControlState.Done: clearInterval(this.timerID);
     }
 
   }
 
   StartHandler() : void {
-    this.ClearInterval(this.timerID);
+    clearInterval(this.timerID);
     this.timerID = setInterval(this.Increament, 1000, this);
     this.isPause = false;
   }
   PauseHandler() : void {
-    this.ClearInterval(this.timerID);
+    clearInterval(this.timerID);
     this.isPause = true;
   }
   ResetHandler() : void {
-    this.ClearInterval(this.timerID);
+    clearInterval(this.timerID);
     this.counter = 0;
     this.isPause = false;
   }
 
-  Increament(self) : void {
-    self.counter = self.counter + 1;
-  }
-  ClearInterval(timerID) : void {
-    clearInterval(timerID);
-  }
-
+  Increament = (self) : void => self.counter = self.counter + 1;
 }

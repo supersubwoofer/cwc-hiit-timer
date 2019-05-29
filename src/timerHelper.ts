@@ -1,5 +1,5 @@
-export let padTime = (time:number) => { return time.toString().padStart(2, '0') }
-export let countDown = (count, current) => { return count - current; }
+export let padTime = (time:number) => time.toString().padStart(2, '0');
+export let countDown = (count, current) => count - current;
 export let secToHMS = (sec:number, format?:string) => {
   var h, m, s; 
   s = sec % 60;
@@ -8,6 +8,7 @@ export let secToHMS = (sec:number, format?:string) => {
   
   if(format){
     let formatLower = format.toLowerCase();
+    
     if(formatLower == 'hh:mm:ss')
       return padTime(h % 24) + ":" + padTime(m % 60) + ":" + padTime(s);
     if(formatLower == 'hh:mm')
