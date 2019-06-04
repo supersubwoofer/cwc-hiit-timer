@@ -4,8 +4,8 @@ import { secToHMS, countDown } from './timerHelper';
 import { currentRound, sprintCounter, restCounter, coolDownCounter } from './counterHelper';
 import { Model, ControlState, GetControlState } from './stateHelper';
 
-@customElement('hiit-timer')
-export class HiitTimer extends LitElement {
+@customElement('cwc-hiit-timer')
+export class CwcHiitTimer extends LitElement {
   @property({type : String}) title = "Sprint-8";
   @property({type : String}) description = "Sprint-8 description ...";
   @property({type : Number}) set = 8;

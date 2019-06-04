@@ -1,23 +1,26 @@
 {
-  "name": "hiit-timer",
+  "name": "cwc-hiit-timer",
   "version": "0.0.0",
   "description": "HIIT Timer Web component",
-  "main": "src/hiit-timer.js",
-  "module": "src/hiit-timer.js",
+  "main": "src/cwc-hiit-timer.js",
+  "module": "src/cwc-hiit-timer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "keywords": [
     "Web",
     "Components",
     "LitElement"
   ],
-  "author": "wing",
+  "author": "chun wing cheng",
   "license": "MIT",
   "dependencies": {
     "lit-element": "^2.1.0"
   },
   "devDependencies": {
+    "parcel-bundler": "^1.12.3",
     "typescript": "^3.4.5"
   },
   "browserslist": [
