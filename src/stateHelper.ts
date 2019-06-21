@@ -1,5 +1,5 @@
 // Model
-export class Model{
+export interface Model{
   set: number
   warmUp: number
   sprint: number
